@@ -110,10 +110,10 @@ body {
     font-family: Arial, sans-serif;
 }
 
-@font-face {
+/* @font-face {
     font-family: digital;
-    src: url(/digital-7\ \(italic\).ttf);
-}
+    src: url(/digital-7\ \(italic\).ttf); */
+/* } */
 
 /* CSS for digital Clock */
 
@@ -134,7 +134,7 @@ body {
 .clock {
     font-size: 30px;
     font-weight: 900;
-    font-family: digital;
+    /* font-family: digital; */
 }
 
 
