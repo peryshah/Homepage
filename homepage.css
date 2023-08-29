@@ -118,24 +118,54 @@ body {
 /* CSS for digital Clock */
 
 .container {
-    width: 200px;
+    width: 15vw;
     max-height: fit-content;
     margin: 10px;
-    padding: 20px;
+    padding: 10px;
     text-align: center;
-    border: 10px solid #030bf5;
+    box-shadow: 3px 3px 10px rgb(248, 1, 1);
     border-radius: 10px;
-    box-shadow: 4px 4px 8px rgba(0, 0, 0, .4);
+    /* box-shadow: 4px 4px 8px rgba(0, 0, 0, .4); */
     background-color: black;
-    color: #0404f1;
+    color: #4f4ff0;
 
 }
 
 .clock {
+    width: 100%;
     font-size: 30px;
     font-weight: 900;
+    margin-top: 10px;
+    /* border: 0.5px solid #a4f503; */
+    box-shadow: 1px 1px 13px rgb(248, 244, 1);
     /* font-family: digital; */
 }
+
+/* CSS for Weather Section Starts */
+.weather {
+    width: 100%;
+    box-shadow: 1px 1px 13px rgb(248, 244, 1);
+    align-items: center;
+}
+.weather h1 {
+    font-size: 2vw;
+}
+.weather input[type="text"] {
+    /* padding: 5px; */
+    font-size: 1vw;
+    /* width: auto; */
+    /* margin-right: 15px; */
+    text-align: center;
+}
+.weather-info h2 {
+    font-size: 2vw;
+}
+.weather-info p {
+    font-size: 1.5vw;
+}
+
+
+/* CSS for Weather Section Ends */
 
 
 
@@ -149,13 +179,13 @@ body {
     height: 75vh;
     margin: 10px 10px;
     border-radius: 10px;
-    box-shadow: 4px 4px 8px rgba(0, 0, 0, .4);
+    box-shadow: 3px 3px 10px rgb(248, 1, 1);
 
 }
 
 .month {
     width: 100%;
-    height: 120px;
+    height: 19%;
     background-color: rgb(0, 0, 0);
     display: flex;
     justify-content: center;
@@ -165,44 +195,53 @@ body {
 }
 
 .month h1 {
-    font-size: 30px;
+    font-size: 2.4vw;
     font-weight: 900;
     text-transform: uppercase;
 }
 
 .month p {
-    font-size: 16px;
+    font-size: 1vw;
     text-transform: capitalize;
 }
 
 .weekdays {
     width: 100%;
-    height: 50px;
+    height: 10vh;
     display: flex;
 }
 
 .weekdays div {
-    font-size: 15px;
+    font-size: 1vw;
     font-weight: bold;
-    letter-spacing: 1px;
+    /* letter-spacing: 1px; */
     width: 100%;
+
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
+    /* background-color: aqua; */
 }
 
 .days {
     width: 100%;
+    height: 60%;
     display: flex;
     flex-wrap: wrap;
-    padding: 2px;
+    /* justify-content: space-evenly; */
+    align-items: center;
+    /* padding-left: 10px; */
+    /* background-color: aquamarine; */
+    /* overflow: hidden; */
+  
 }
 
 .days div {
-    font-size: 14px;
-    margin: 3px;
-    width: 65px;
-    height: 59px;
+    font-size: 1vw;
+    /* margin: 0.3vw; */
+    /* padding: 0.8vw; */
+    width: 5vw;
+    height: 7vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -212,10 +251,12 @@ body {
 .days div:hover:not(.empty) {
     /* border: 2px solid gray; */
     cursor: pointer;
+    background-color: #FFF;
+    color: red;
 }
 
 .today {
-    background-color: rgb(26, 5, 253)
+    background-color: rgb(13, 20, 238)
 }
 
 
@@ -234,6 +275,7 @@ body {
     text-align: center;
     color: white;
     border-radius: 10px;
+    box-shadow: 3px 3px 10px rgb(248, 1, 1);
 }
 
 input[type="text"] {

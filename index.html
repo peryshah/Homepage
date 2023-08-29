@@ -30,12 +30,25 @@
         <div class="container">
             <!-- <h1>Digital Clock</h1> -->
             <div class="clock">
-              <span id="hours">00</span>:
-              <span id="minutes">00</span>:
-              <span id="seconds">00</span>
-              <span id="amPm">AM</span>
+                <span id="hours">00</span>:
+                <span id="minutes">00</span>:
+                <span id="seconds">00</span>
+                <span id="amPm">AM</span>
             </div>
-          </div>
+            <div class="weather">
+                <h1>weather</h1>
+                <form>
+                    <input type="text" id="city-input"
+                    placeholder="City Name">
+                    <input type="submit" value="&#x1F50D">
+                </form>
+                <div class="weather-info">
+                    <h2 id="city-name">Ahmedabad</h2>
+                    <p id="weather-description">Sunny</p>
+                    <p id="temperature">36&#8451</p>
+                </div>
+            </div>
+        </div>
         <!-- This is the container for Calender module -->
         <div class="Calender">
             <div class="month">
@@ -59,18 +72,18 @@
 
         </div>
         <!-- This is the container for ToDoList module -->
-        
+
         <div class="container2">
             <h1>To-Do List</h1>
             <div>
-              <input type="text" id="taskInput" placeholder="Enter your task...">
-              <button id="addButton">Add</button>
+                <input type="text" id="taskInput" placeholder="Enter your task...">
+                <button id="addButton">Add</button>
             </div>
             <ul id="taskList"></ul>
-          </div>
-          
-      
-         
+        </div>
+
+
+
 
     </div>
 
@@ -82,11 +95,11 @@
     <a href="https://openai.com/" target="_blank" class="button"> CHATGPT </a>
 
 
-    
+
     <script src="homepage.js"></script>
 
 
-    
+
 </body>
 
 </html>

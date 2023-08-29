@@ -27,33 +27,33 @@ function updateClock() {
     const minutes = String(now.getMinutes()).padStart(2, '0');
     const seconds = String(now.getSeconds()).padStart(2, '0');
     let amOrPm = '';
-  
+
     if (hours >= 12) {
-      amOrPm = 'PM';
+        amOrPm = 'PM';
     } else {
-      amOrPm = 'AM';
+        amOrPm = 'AM';
     }
-  
+
     // Convert to 12-hour format
     hours = (hours % 12) || 12;
-  
+
     const hoursElement = document.getElementById('hours');
     const minutesElement = document.getElementById('minutes');
     const secondsElement = document.getElementById('seconds');
     const amPmElement = document.getElementById('amPm');
-  
+
     hoursElement.textContent = String(hours).padStart(2, '0');
     minutesElement.textContent = minutes;
     secondsElement.textContent = seconds;
     amPmElement.textContent = amOrPm;
-  }
-  
-  // Update the clock every second
-  setInterval(updateClock, 1000);
-  
-  // Initial update on page load
-  updateClock();
-  
+}
+
+// Update the clock every second
+setInterval(updateClock, 1000);
+
+// Initial update on page load
+updateClock();
+
 
 // <---JavaScript for Calender--->
 const monthEl = document.querySelector(".date h1");
