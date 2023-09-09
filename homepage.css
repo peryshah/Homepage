@@ -350,6 +350,7 @@ li input[type="checkbox"] {
     height: 40vh;
     background-color: #6591f1;
 }
+
 .table1 h1 {
     text-align: center;
     /* margin: 10px 0px; */
@@ -371,11 +372,13 @@ li input[type="checkbox"] {
 .table1 td {
     text-align: center;
 }
+
 tr:nth-child(1) {
     background-color: #64bcec;
     color: red;
-  }
-  tr:nth-child(odd) {
+}
+
+tr:nth-child(odd) {
     background-color: #2519cc;
     color: rgb(30, 222, 81);
-  }
+}
