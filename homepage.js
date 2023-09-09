@@ -53,7 +53,7 @@ setInterval(updateClock, 1000);
 
 // Initial update on page load
 updateClock();
-
+// End of Javascript for digital clock---------------------------------------------------------------
 
 // <---JavaScript for Calender--->
 const monthEl = document.querySelector(".date h1");
@@ -189,7 +189,33 @@ loadTasks();
 
 // Javascript for Nifty50
 
-// JS for event calander
+// JS for weather app starts---------------------------------------------------------------------
+
+const apiKey = "9a16fa92031c2bed3ddb56899fd6ae8e";
+const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
 
 
+const searchBox = document.querySelector(".weather input")
+const searchBtn = document.querySelector(".weather button")
+
+
+async function checkWeather(city) {
+    const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
+    var data = await response.json();
+    // console.log(data);
+
+    document.querySelector(".city").innerHTML = data.name;
+    document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + " ℃";
+    document.querySelector(".wind").innerHTML = "Wind Speed " + data.wind.speed + " Km/h";
+    document.querySelector(".sunrise").innerHTML = Math.time(data.sys.sunrise);
+
+}
+
+
+
+searchBtn.addEventListener("click", () => {
+    checkWeather(searchBox.value);
+})
+
+checkWeather();
 
