@@ -364,12 +364,11 @@ li input[type="checkbox"] {
 }
 
 tr:nth-child(even) {
-    background-color: #f88e8a;
     color: #fff;
 }
 
 tr:nth-child(odd) {
-    background-color: #000003;
+    background-color: #2f2f35;
     color: #fff;
 }
 
@@ -405,3 +404,12 @@ table {
 }
 
 
+.utility {
+    width: 100vw;
+    min-height: 100px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    /* background-color: #670f0c; */
+}
