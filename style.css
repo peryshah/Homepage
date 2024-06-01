@@ -10,7 +10,7 @@ body {
 
 .calculator {
     width: 375px; /* Adjusted width to match iPhone calculator */
-    height: 667px; /* Adjusted height to match iPhone calculator */
+    height: 580px; /* Adjusted height to match iPhone calculator */
     border-radius: 40px;
     overflow: hidden;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
