@@ -341,15 +341,17 @@ li input[type="checkbox"] {
     min-height: 30vw;
     /* background-color: #6591f1; */
 }
+
 .cbi a {
     padding: 3px 0px;
     display: flex;
     justify-content: center;
 }
+
 .cbi a img {
     width: 20vw;
 
-   
+
 }
 
 .cbi th {
@@ -378,18 +380,21 @@ tr:nth-child(odd) {
     min-height: 30vw;
     /* background-color: #6591f1; */
 }
+
 table {
     width: 100%;
 }
+
 .table2 a {
     padding: 3px 0px;
     display: flex;
     justify-content: center;
 }
+
 .table2 a img {
     width: 10vw;
 
-   
+
 }
 
 .table2 th {
@@ -418,138 +423,23 @@ table {
 
 
 /* CSS for Games////////////////////////////////////////////////////////////////////////////// */
-/* CSS for Tic Tac Toe.................................................................. */
-
-#main h1 {
-	color: orangered;
-	margin-bottom: -5px;
+.ytdownload{
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding-top: 50px;
 }
-#main p {
-	margin-bottom: -10px;
+#videoUrlInput {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 20px;
 }
-.ui {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-.row {
-	display: flex;
-}
-.cell {
-	border: none;
-	width: 2vw;
-	height: 5vw;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-size: 24px;
-	text-align: center;
-	cursor: pointer;
-}
-.cell:active {
-	outline: none;
-}
-/* 3*3 Grid */
-#b1{
-	border-bottom: 1px solid gray;
-	border-right: 1px solid gray;
-    width: 7vw;
-	height: 5vw;
-    margin-bottom: 1vw;
+#downloadButton {
+    padding: 12px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
-#b2 {
-	border-bottom: 1px solid gray;
-	border-right: 1px solid gray;
-	border-left: 1px solid gray;
-    width: 7vw;
-	height: 5vw;
-}
-
-#b3 {
-	border-bottom: 1px solid gray;
-	border-left: 1px solid gray;
-    width: 7vw;
-	height: 5vw;
-}
-
-#b4 {
-	border-top: 1px solid gray;
-	border-bottom: 1px solid gray;
-	border-right: 1px solid gray;
-    width: 7vw;
-	height: 5vw;
-    margin-bottom: 1vw;
-}
-	
-#b5 {
-	border: 1px solid gray;
-    width: 7vw;
-	height: 5vw;
-}
-
-#b6 {
-	border-top: 1px solid gray;
-	border-bottom: 1px solid gray;
-	border-left: 1px solid gray;
-    width: 7vw;
-	height: 5vw;
-}
-
-#b7 {
-	border-top: 1px solid gray;
-	border-right: 1px solid gray;
-    width: 7vw;
-	height: 5vw;
-}
-
-#b8 {
-	border-top: 1px solid gray;
-	border-right: 1px solid gray;
-	border-left: 1px solid gray;
-    width: 7vw;
-	height: 5vw;
-}
-
-#b9 {
-	border-top: 1px solid gray;
-	border-left: 1px solid gray;
-    width: 7vw;
-	height: 5vw;
-}
-/* Reset Button */
-#but {
-	box-sizing: border-box;
-	width: 20vw;
-	height: 10vh;
-	border: 1px solid dodgerblue;
-	margin-left: auto;
-	border-radius: 8px;
-	font-family: Verdana,
-		Geneva, Tahoma, sans-serif;
-
-	background-color: whitesmoke;
-	color: dodgerblue;
-	font-size: 20px;
-	cursor: pointer;
-}
-
-/* Player turn space */
-#print {
-	font-family: Verdana,
-		Geneva, Tahoma, sans-serif;
-	color: dodgerblue;
-	font-size: 20px;
-}
-
-/* Main Container */
-#main {
-	text-align: center;
-}
-
-/* Game Instruction Text */
-#ins {
-	font-family: Verdana,Geneva,
-					Tahoma, sans-serif;
-	color: dodgerblue;
-}
+/* CSS for SUDUKU Starts.................................................................. */
