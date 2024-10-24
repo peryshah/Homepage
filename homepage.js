@@ -1,291 +1,162 @@
-// <---JavaScript for Clock---> 
+// Variables
+let currentDate = new Date();
+let selectedDate = null;
+const today = new Date();
+const calendarBody = document.getElementById('calendarBody');
+const monthYear = document.getElementById('monthYear');
+const eventInput = document.getElementById('eventInput');
+const addEventButton = document.getElementById('addEventButton');
+const eventsList = document.getElementById('eventsList');
+let events = JSON.parse(localStorage.getItem('events')) || {};
 
-// const hourEl = document.querySelector(".hour")
-// const minuteEl = document.querySelector(".minute")
-// const secondEl = document.querySelector(".second")
+// Functions
+function loadCalendar() {
+    calendarBody.innerHTML = '';
+    const month = currentDate.getMonth();
+    const year = currentDate.getFullYear();
 
+    // Set month-year header
+    monthYear.textContent = `${currentDate.toLocaleString('default', { month: 'long' })} ${year}`;
 
-// function updateClock() {
-//     const currentDate = new Date();
-//     // setTimeout(updateClock, 1000)
-//     const hour = currentDate.getHours();
-//     const minute = currentDate.getMinutes();
-//     const second = currentDate.getSeconds();
-//     const hourDeg = (hour / 12) * 360;
-//     hourEl.style.transform = `rotate(${hourDeg}deg)`
-//     const minuteDeg = (minute / 60) * 360;
-//     minuteEl.style.transform = `rotate(${minuteDeg}deg)`
-//     const secondDeg = (second / 60) * 360;
-//     secondEl.style.transform = `rotate(${secondDeg}deg)`
-// }
+    const firstDayOfMonth = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-// // updateClock();
-// setInterval(updateClock, 1000)
-function updateClock() {
-    const now = new Date();
-    let hours = now.getHours();
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    const seconds = String(now.getSeconds()).padStart(2, '0');
-    let amOrPm = '';
-
-    if (hours >= 12) {
-        amOrPm = 'PM';
-    } else {
-        amOrPm = 'AM';
+    // Fill in the blank days
+    for (let i = 0; i < firstDayOfMonth; i++) {
+        const emptyCell = document.createElement('div');
+        calendarBody.appendChild(emptyCell);
     }
 
-    // Convert to 12-hour format
-    hours = (hours % 12) || 12;
+    // Fill in the days
+    for (let day = 1; day <= daysInMonth; day++) {
+        const dayCell = document.createElement('div');
+        dayCell.classList.add('day');
+        dayCell.textContent = day;
 
-    const hoursElement = document.getElementById('hours');
-    const minutesElement = document.getElementById('minutes');
-    const secondsElement = document.getElementById('seconds');
-    const amPmElement = document.getElementById('amPm');
+        const dateToCheck = new Date(year, month, day);
+        const dateKey = dateToCheck.toDateString();
 
-    hoursElement.textContent = String(hours).padStart(2, '0');
-    minutesElement.textContent = minutes;
-    secondsElement.textContent = seconds;
-    amPmElement.textContent = amOrPm;
-}
+        // Highlight today's date with a purple shadow
+        if (today.toDateString() === dateToCheck.toDateString()) {
+            dayCell.classList.add('today');
+        }
 
-// Update the clock every second
-setInterval(updateClock, 1000);
+        // Highlight selected date
+        if (selectedDate && selectedDate.toDateString() === dateToCheck.toDateString()) {
+            dayCell.classList.add('selected');
+        }
 
-// Initial update on page load
-updateClock();
-// End of Javascript for digital clock---------------------------------------------------------------
+        // Show event dot if there are events for that date
+        if (events[dateKey]) {
+            const eventDot = document.createElement('div');
+            eventDot.classList.add('event-dot');
+            dayCell.appendChild(eventDot);
+        }
 
-// <---JavaScript for Calender--->
-const monthEl = document.querySelector(".date h1");
-const fullDateEl = document.querySelector(".date p");
-const daysEl = document.querySelector(".days");
+        // Add click event to select date
+        dayCell.onclick = () => selectDate(dateToCheck);
 
-const monthInx = new Date().getMonth();
-const lastDay = new Date(new Date().getFullYear(), monthInx + 1, 0).getDate();
-const firstDay = new Date(new Date().getFullYear(), monthInx, 1).getDay() - 1;
-
-// console.log(firstDay);
-
-
-
-const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-];
-monthEl.innerText = months[monthInx];
-fullDateEl.innerText = new Date().toDateString();
-
-let days = "";
-
-for (let i = firstDay; i > 0; i--) {
-    days += `<div class= "empty"></div>`;
-}
-
-for (let i = 1; i <= lastDay; i++) {
-    if ((i === new Date().getDate())) {
-        days += `<div class="today">${i}</div>`;
-    } else {
-        days += `<div>${i}</div>`;
-
-    }
-
-}
-
-daysEl.innerHTML = days;
-
-
-
-// <---JavaScript for ToDoList--->
-
-const taskList = document.getElementById('taskList');
-const taskInput = document.getElementById('taskInput');
-const addButton = document.getElementById('addButton');
-let tasks = [];
-
-function addTask() {
-    const taskText = taskInput.value.trim();
-
-    if (taskText === '') {
-        alert('Please enter a task.');
-        return;
-    }
-
-    const taskItem = document.createElement('li');
-    taskItem.innerHTML = `
-    <input type="checkbox" onclick="toggleTask(this)">
-    <span>${taskText}</span>
-    <button onclick="removeTask(this)">Remove</button>
-  `;
-
-    taskList.appendChild(taskItem);
-    taskInput.value = '';
-
-    // Save the tasks to local storage
-    tasks.push(taskText);
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-}
-
-function toggleTask(checkbox) {
-    const taskText = checkbox.nextElementSibling;
-    if (checkbox.checked) {
-        taskText.style.textDecoration = 'line-through';
-    } else {
-        taskText.style.textDecoration = 'none';
+        calendarBody.appendChild(dayCell);
     }
 }
 
-function removeTask(button) {
-    const taskItem = button.parentElement;
-    taskList.removeChild(taskItem);
-
-    // Update the tasks array and save to local storage
-    const taskText = taskItem.querySelector('span').textContent;
-    tasks = tasks.filter(task => task !== taskText);
-    localStorage.setItem('tasks', JSON.stringify(tasks));
+function selectDate(date) {
+    selectedDate = date; // Set selected date
+    loadCalendar(); // Reload calendar to update selected state
+    loadEvents(); // Load events for the selected date
 }
 
-// Load tasks from local storage on page load
-function loadTasks() {
-    const storedTasks = localStorage.getItem('tasks');
-    if (storedTasks) {
-        tasks = JSON.parse(storedTasks);
-        tasks.forEach(task => {
-            const taskItem = document.createElement('li');
-            taskItem.innerHTML = `
-        <input type="checkbox" onclick="toggleTask(this)">
-        <span>${task}</span>
-        <button onclick="removeTask(this)">Remove</button>
-      `;
-            taskList.appendChild(taskItem);
+function loadEvents() {
+    eventsList.innerHTML = ''; // Clear existing events
+    if (selectedDate) {
+        const dateKey = selectedDate.toDateString();
+        const dateEvents = events[dateKey] || [];
+        dateEvents.forEach((event, index) => {
+            const li = document.createElement('li');
+            const eventText = document.createElement('span');
+            eventText.textContent = event.text;
+            eventText.className = event.done ? 'event-text done' : 'event-text'; // Add class based on done status
+
+            const eventButtons = document.createElement('div');
+            eventButtons.classList.add('event-buttons');
+
+            const doneButton = document.createElement('button');
+            doneButton.textContent = 'Done';
+            doneButton.classList.add('done-btn');
+            doneButton.onclick = () => markEventAsDone(dateKey, index);
+
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.classList.add('delete-btn');
+            deleteButton.onclick = () => deleteEvent(dateKey, index);
+
+            eventButtons.appendChild(doneButton);
+            eventButtons.appendChild(deleteButton);
+
+            li.appendChild(eventText);
+            li.appendChild(eventButtons);
+            eventsList.appendChild(li);
         });
     }
 }
 
-// Handle adding tasks on pressing "Enter" key
-taskInput.addEventListener('keyup', function (event) {
-    if (event.key === 'Enter') {
-        addTask();
-    }
-});
+function addEvent() {
+    const eventText = eventInput.value.trim();
+    if (!eventText || !selectedDate) return;
 
-// Handle adding tasks on clicking the "Add" button
-addButton.addEventListener('click', addTask);
+    const dateKey = selectedDate.toDateString();
+    if (!events[dateKey]) events[dateKey] = [];
+    events[dateKey].push({ text: eventText, done: false });
 
-// Load tasks from local storage on page load
-loadTasks();
-
-
-
-
-// Javascript for Nifty50
-
-// JS for weather app starts---------------------------------------------------------------------
-
-const apiKey = "9a16fa92031c2bed3ddb56899fd6ae8e";
-const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
-
-
-const searchBox = document.querySelector(".weather input")
-const searchBtn = document.querySelector(".weather button")
-
-
-async function checkWeather(city) {
-    const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
-    var data = await response.json();
-    // console.log(data);
-
-    document.querySelector(".city").innerHTML = data.name;
-    document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + " ℃";
-    document.querySelector(".wind").innerHTML = "Wind Speed " + data.wind.speed + " Km/h";
-    document.querySelector(".sunrise").innerHTML = Math.time(data.sys.sunrise);
-
+    localStorage.setItem('events', JSON.stringify(events));
+    eventInput.value = '';
+    loadCalendar();
+    loadEvents();
 }
 
-
-
-searchBtn.addEventListener("click", () => {
-    checkWeather(searchBox.value);
-})
-
-checkWeather();
-
-// JS for Games///////////////////////////////////////////////////////////////////////////////
-
-
-
-// JS for Youtube downloader Starts /////////////////////////////////////////////////////////
-
-
-
-const express = require('express');
-const app = express();
-const { exec } = require('child_process');
-
-// Handle GET request to initiate video download
-app.get('/api/download', (req, res) => {
-    const videoUrl = req.query.url;
-    if (!videoUrl) {
-        return res.status(400).json({ success: false, error: 'Invalid video URL' });
-    }
-
-    // Use youtube-dl to download the video
-    const command = `youtube-dl -f bestvideo+bestaudio --merge-output-format mp4 ${videoUrl}`;
-    exec(command, (error, stdout, stderr) => {
-        if (error) {
-            console.error('Error:', error);
-            return res.status(500).json({ success: false, error: 'Failed to download video' });
-        }
-
-        console.log('Video downloaded:', stdout);
-        res.json({ success: true });
-    });
-});
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
-
-
-function downloadVideo() {
-	const videoUrl = document.getElementById('videoUrlInput').value;
-	if (videoUrl.trim() === '') {
-		alert('Please enter a valid YouTube video URL.');
-		return;
-	}
-
-	// Call a backend API to initiate the video download
-	fetch(`/api/download?url=${encodeURIComponent(videoUrl)}`)
-		.then(response => response.json())
-		.then(data => {
-			if (data.success) {
-				alert('Video download initiated successfully.');
-			} else {
-				alert('Failed to initiate video download. Please try again.');
-			}
-		})
-		.catch(error => {
-			console.error('Error:', error);
-			alert('An error occurred. Please try again.');
-		});
+function markEventAsDone(dateKey, index) {
+    events[dateKey][index].done = true;
+    localStorage.setItem('events', JSON.stringify(events));
+    loadEvents();
 }
-// JS for Youtube downloader ends /////////////////////////////////////////////////////////
 
+function deleteEvent(dateKey, index) {
+    events[dateKey].splice(index, 1);
+    if (events[dateKey].length === 0) delete events[dateKey];
+    localStorage.setItem('events', JSON.stringify(events));
+    loadCalendar();
+    loadEvents();
+}
 
+// Digital clock logic
+function updateClock() {
+    const now = new Date();
+    let hours = now.getHours();
+    const minutes = now.getMinutes();
+    const seconds = now.getSeconds();
+    const amPm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12 || 12;  // Convert to 12-hour format
+    document.getElementById('clockDisplay').textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')} ${amPm}`;
+}
 
-// JS for SUKUDU Starts ///////////////////////////////////////////////////////////////////////////
+setInterval(updateClock, 1000); // Update clock every second
 
+// Event Listeners
+addEventButton.addEventListener('click', addEvent);
+eventInput.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') addEvent();
+});
 
+document.getElementById('prevMonth').addEventListener('click', () => {
+    currentDate.setMonth(currentDate.getMonth() - 1);
+    loadCalendar();
+});
 
+document.getElementById('nextMonth').addEventListener('click', () => {
+    currentDate.setMonth(currentDate.getMonth() + 1);
+    loadCalendar();
+});
 
-// JS for SUDUKU Ends/////////////////////////////////////////////////////////////////////////////
+// Initial Load
+loadCalendar();
+updateClock();  // Start clock

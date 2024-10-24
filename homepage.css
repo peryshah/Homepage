@@ -1,331 +1,178 @@
 body {
+    background-color: rgb(65, 68, 75);
+    font-family: Arial, sans-serif;
     padding: 0px;
     margin: 0px;
-    font-family: Arial, sans-serif;
-    background-color: rgb(65, 68, 75);
     box-sizing: border-box;
 }
 
-.main {
-    width: 100vw;
-    /* height: 85vh; */
-    /* background: lightgrey; */
-    display: flex;
-    justify-content: space-evenly;
-    /* margin-left: ; */
-}
 
-/* Styling codes for Analog Clock  */
-
-/* .clock {
-    position: relative;
-    margin: 10px 10px;
-    width: 240px;
-    height: 240px;
-    background: rgb(0, 0, 0);
+.container {
     display: flex;
     justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    /* border: 3px solid gray; */
-/* box-shadow: 3px 3px 3px rgba(209, 209, 209, 0.4);
+    /* align-items: flex-start; */
+    width: 90vw; /* Set container width to 90vw */
+    height: 60vh; /* Set container height to 50vh */
+    padding-left: 3vw;
 }
-
-.numbers div {
-    position: absolute;
-    font-size: 20px;
-    font-weight: bold;
-    color: grey;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, .7);
-}
-
-.twelve {
-    top: 6px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.three { */
-/* right: 6px;
-    top: 50%;
-    transform: translatey(-50%);
-}
-
-.six {
-    bottom: 6px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.nine {
-    left: 6px;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.arrows {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    justify-content: center;
-    align-items: center; */
-/* 
-}
-
-.arrows::before {
-    content: "";
-    width: 12px;
-    height: 12px;
-    background-color: grey;
-    border-radius: 50%;
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, .7);
-    z-index: 4;
-} */
-
-/* .arrows div {
-    background-color: grey;
-    width: 7px;
-    position: absolute;
-    height: 80px;
-    transform-origin: bottom center;
-    bottom: 50%;
-    border-radius: 50% 50% 0 0;
-    box-shadow: 2px 2px 2px rgba(0, 0, 0, .5);
-} */
-
-/* .arrows .hour {
-    height: 60px;
-    transform: rotate(60deg);
-}
-
-.arrows .second {
-    /* height: 60px; */
-/* transform: rotate(250deg); */
-/* background-color: rgb(0, 60, 255); */
-/* height: 90px; */
-/* width: 4px;
-}  */
-
-
-
-
-/* CSS for digital Clock */
-
-.clock-main {
-    width: 15vw;
-    max-height: fit-content;
-    margin: 10px;
-    padding: 10px;
-    text-align: center;
-    box-shadow: 3px 3px 10px rgb(248, 1, 1);
-    border-radius: 10px;
-    background-color: black;
-    color: #4f4ff0;
-
-}
-
-.clock {
-    width: 100%;
-    font-size: 30px;
-    font-weight: 900;
-    margin-top: 10px;
-    box-shadow: 1px 1px 13px rgb(248, 244, 1);
-}
-
-/* CSS for Weather Section Starts */
-.weather {
-    width: 100%;
-    box-shadow: 1px 1px 13px rgb(248, 244, 1);
-    align-items: center;
-}
-
-.weather h1 {
-    font-size: 2vw;
-}
-
-.weather input[type="text"] {
-    /* padding: 5px; */
-    font-size: 1vw;
-    /* width: auto; */
-    /* margin-right: 15px; */
-    text-align: center;
-}
-
-.weather-info h2 {
-    font-size: 1.2vw;
-}
-
-.weather-info p {
-    font-size: 1.5vw;
-}
-
-
-
-
-/* CSS for Weather Section Ends */
-
-
-
-
-/* Styling codes for calender */
-
-.Calender {
-    background-color: rgb(0, 0, 0);
-    color: lightgray;
-    width: 40vw;
-    height: 75vh;
-    margin: 10px 10px;
-    border-radius: 10px;
-    box-shadow: 3px 3px 10px rgb(248, 1, 1);
-
-}
-
-.month {
-    width: 100%;
-    height: 19%;
-    background-color: rgb(0, 0, 0);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    border-radius: 10px 10px 0px 0px;
-}
-
-.month h1 {
-    font-size: 2.4vw;
-    font-weight: 900;
-    text-transform: uppercase;
-}
-
-.month p {
-    font-size: 1vw;
-    text-transform: capitalize;
-}
-
-.weekdays {
-    width: 100%;
-    height: 10vh;
-    /* background-color: beige; */
-    display: flex;
-}
-
-.weekdays div {
-    font-size: 1vw;
-    font-weight: bold;
-    /* letter-spacing: 1px; */
-    width: 100%;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    /* background-color: aqua; */
-}
-
-.days {
-    width: 100%;
-    height: 60%;
-    display: flex;
-    flex-wrap: wrap;
-
-    align-items: center;
-
-
-}
-
-.days div {
-    font-size: 1vw;
-    margin: 3px 3px;
-    /* padding: 0.1vw; */
-    /* background-color: aquamarine; */
-    width: 13%;
-    height: 18%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-@media screen and (max-width: 1240px) {
-    .days div {
-        /* background-color: rgb(85, 85, 231); */
-        margin: 3px 2.2px;
-        /* width: 4vw;
-        height: 6vh; */
-
-    }
-}
-
-@media screen and (max-width: 860px) {
-    .days div {
-        /* background-color: rgb(85, 85, 231); */
-        margin: 3px 1.2px;
-        /* width: 4vw;
-        height: 6vh; */
-
-    }
-}
-
-.days div:hover:not(.empty) {
-    /* border: 2px solid gray; */
-    cursor: pointer;
-    background-color: #FFF;
-    color: red;
-}
-
-.today {
-    background-color: rgb(13, 20, 238)
-}
-
-
-/* Styling codes for ToDoList  */
-
-
-
-.to-do-list {
-    width: 40vw;
-    height: 75vh;
-    margin: 10px;
+.clock-section {
+    width: 160px; /* Set width for clock section */
+    /* background-color: #e0e0e0; */
     padding: 20px;
-    background-color: black;
+    /* box-shadow: 0 0 10px rgba(0,0,0,0.1); */
     text-align: center;
+    margin-right: 20px; /* Space between clock and calendar */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center content vertically */
+}
+.clock {
+    font-size: 48px;
+    font-weight: bold;
+    color: #ff0000;
+}
+.calendar {
+    width: 50%;
+    padding: 20px;
+    margin: 20px; /* Added margin */
+    background-color: #e0e0e0;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    overflow: auto; /* Allows scrolling if content exceeds height */
+}
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.calendar-header button {
+    padding: 10px;
+    background-color: #007bff;
     color: white;
-    border-radius: 10px;
-    box-shadow: 3px 3px 10px rgb(248, 1, 1);
+    border: none;
+    cursor: pointer;
 }
-
-/* @media screen and (max-width: px) {
-    .to-do-list {
-        background-color: blue;
-         width: 80vw;
-    }
-}   */
-
-input[type="text"] {
-    padding: 5px;
-    width: 80%;
-    margin-right: 15px;
+.calendar-header button:hover {
+    background-color: #0056b3;
 }
-
-
-
-
-ul {
-    list-style: none;
+.calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    margin-top: 10px;
+    font-weight: bold;
+}
+.calendar-body {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+}
+.day {
+    padding: 10px;
+    background-color: #f0f0f0;
+    text-align: center;
+    position: relative;
+    cursor: pointer; /* Cursor to indicate clickable */
+}
+.day:hover {
+    background-color: #7774c3;
+}
+.today {
+    background-color: #b1cfee;
+    /* color: white; */
+    /* border-radius: 50%; */
+    box-shadow: 0 0 6px 2px #c894ed;
+}
+.selected {
+    background-color: #f1a1a1; /* Color for selected date */
+    /* border-radius: 50%; Optional: rounded corners */
+    color: #f10606; /* Change text color for better contrast */
+}
+.event-dot {
+    width: 16px; /* Updated width */
+    height: 2px; /* Updated height */
+    background-color: #ff6347;
+    border-radius: 2px;
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.events {
+    width: 50%;
+    padding: 20px;
+    margin: 20px; /* Added margin */
+    background-color: #e0e0e0;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    overflow: auto; /* Allows scrolling if content exceeds height */
+}
+.events-list {
+    list-style-type: none;
     padding: 0;
 }
-
-span {
-    margin: 10px;
-}
-
-li {
+.events-list li {
+    padding: 10px;
+    background-color: #f8f9fa;
+    margin-bottom: 10px;
+    border-left: 4px solid #007bff;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    margin: 5px 0;
+}
+.event-text {
+    flex-grow: 1;
+    margin-right: 10px;
+}
+.event-text.done {
+    text-decoration: line-through; /* Strikethrough for done events */
+    color: grey;
+}
+.event-input {
+    display: flex;
+    margin-bottom: 20px;
+}
+.event-input input {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.event-input button {
+    width: 20%;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+.event-input button:hover {
+    background-color: #218838;
+}
+.event-buttons {
+    display: flex;
+    gap: 5px;
+}
+.event-buttons button {
+    padding: 5px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 3px;
+}
+.event-buttons .delete-btn {
+    background-color: #dc3545;
+}
+.event-buttons .done-btn {
+    background-color: #28a745;
+}
+.event-buttons .delete-btn:hover {
+    background-color: #c82333;
+}
+.event-buttons .done-btn:hover {
+    background-color: #218838;
 }
 
-li input[type="checkbox"] {
-    margin-right: 0;
-}
+
+
 
 
 
