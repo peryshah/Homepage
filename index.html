@@ -12,21 +12,22 @@
 </head>
 
 <body>
-    <!-- This is the container for Clock, Calendar, To Do List module -->
-    <div class="container">
-        <!-- Digital Clock Section -->
-        <div class="clock-section">
-            <div class="clock" id="clockDisplay"></div>
+    <!-- This is the container for Clock, Calendar, Events -->
+    <div id="main-container">
+        <!-- Clock Container -->
+        <div id="clock-container">
+
+            <div id="clock">--:--:-- AM</div>
         </div>
 
-        <!-- Calendar -->
-        <div class="calendar">
-            <div class="calendar-header">
-                <button id="prevMonth">Previous</button>
-                <h2 id="monthYear"></h2>
-                <button id="nextMonth">Next</button>
+        <!-- Calendar Container -->
+        <div id="calendar-container">
+            <div id="calendar-header">
+                <button id="prevMonthBtn">&lt;</button>
+                <h2 id="monthYear">Month Year</h2>
+                <button id="nextMonthBtn">&gt;</button>
             </div>
-            <div class="calendar-weekdays">
+            <div id="weekdays">
                 <div>Sun</div>
                 <div>Mon</div>
                 <div>Tue</div>
@@ -35,17 +36,17 @@
                 <div>Fri</div>
                 <div>Sat</div>
             </div>
-            <div class="calendar-body" id="calendarBody"></div>
+            <div id="calendar-days"></div>
         </div>
-        
-        <!-- Events Section -->
-        <div class="events">
-            <h2>Events</h2>
-            <div class="event-input">
-                <input type="text" id="eventInput" placeholder="Add event for selected date">
-                <button id="addEventButton">Add</button>
+
+        <!-- Event Container -->
+        <div id="event-container">
+            <h3>Events for <span id="selectedDate">Selected Date</span></h3>
+            <div id="event-input-section">
+                <input type="text" id="eventInput" placeholder="Add new event">
+                <button id="addEventBtn">Add Event</button>
             </div>
-            <ul class="events-list" id="eventsList"></ul>
+            <div id="eventList" class="event-list"></div>
         </div>
     </div>
 

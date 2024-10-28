@@ -1,162 +1,193 @@
-// Variables
-let currentDate = new Date();
+let events = {};  // Object to store events by date
 let selectedDate = null;
-const today = new Date();
-const calendarBody = document.getElementById('calendarBody');
-const monthYear = document.getElementById('monthYear');
-const eventInput = document.getElementById('eventInput');
-const addEventButton = document.getElementById('addEventButton');
-const eventsList = document.getElementById('eventsList');
-let events = JSON.parse(localStorage.getItem('events')) || {};
+let currentMonth = new Date().getMonth();
+let currentYear = new Date().getFullYear();
 
-// Functions
+// Save events to localStorage
+function saveEvents() {
+    localStorage.setItem('events', JSON.stringify(events));
+}
+
+// Load events from localStorage
+function loadEventsFromStorage() {
+    const storedEvents = localStorage.getItem('events');
+    if (storedEvents) {
+        events = JSON.parse(storedEvents);
+    }
+    loadCalendar(); // Load calendar after events
+    loadEvents(); // Load events for selected date
+}
+
+// Generate and display the calendar
 function loadCalendar() {
-    calendarBody.innerHTML = '';
-    const month = currentDate.getMonth();
-    const year = currentDate.getFullYear();
+    const calendarDays = document.getElementById('calendar-days');
+    const monthYear = document.getElementById('monthYear');
+    calendarDays.innerHTML = ''; // Clear previous calendar
 
-    // Set month-year header
-    monthYear.textContent = `${currentDate.toLocaleString('default', { month: 'long' })} ${year}`;
+    const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
+    const lastDateOfMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-    const firstDayOfMonth = new Date(year, month, 1).getDay();
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    monthYear.textContent = `${monthNames[currentMonth]} ${currentYear}`;
 
-    // Fill in the blank days
+    // Add blank spaces for days before the first of the month
     for (let i = 0; i < firstDayOfMonth; i++) {
-        const emptyCell = document.createElement('div');
-        calendarBody.appendChild(emptyCell);
+        const emptyDay = document.createElement('div');
+        calendarDays.appendChild(emptyDay);
     }
 
-    // Fill in the days
-    for (let day = 1; day <= daysInMonth; day++) {
-        const dayCell = document.createElement('div');
-        dayCell.classList.add('day');
-        dayCell.textContent = day;
+    // Add days of the month
+    for (let i = 1; i <= lastDateOfMonth; i++) {
+        const dayElement = document.createElement('div');
+        dayElement.classList.add('calendar-day');
+        dayElement.textContent = i;
 
-        const dateToCheck = new Date(year, month, day);
-        const dateKey = dateToCheck.toDateString();
+        const dateKey = new Date(currentYear, currentMonth, i).toDateString();
 
-        // Highlight today's date with a purple shadow
-        if (today.toDateString() === dateToCheck.toDateString()) {
-            dayCell.classList.add('today');
+        // Highlight today's date
+        if (new Date().toDateString() === dateKey) {
+            dayElement.classList.add('today');
         }
 
-        // Highlight selected date
-        if (selectedDate && selectedDate.toDateString() === dateToCheck.toDateString()) {
-            dayCell.classList.add('selected');
-        }
-
-        // Show event dot if there are events for that date
-        if (events[dateKey]) {
+        // Add a small dot if there are events for this day
+        if (events[dateKey] && events[dateKey].length > 0) {
             const eventDot = document.createElement('div');
             eventDot.classList.add('event-dot');
-            dayCell.appendChild(eventDot);
+            dayElement.appendChild(eventDot);
         }
 
-        // Add click event to select date
-        dayCell.onclick = () => selectDate(dateToCheck);
-
-        calendarBody.appendChild(dayCell);
-    }
-}
-
-function selectDate(date) {
-    selectedDate = date; // Set selected date
-    loadCalendar(); // Reload calendar to update selected state
-    loadEvents(); // Load events for the selected date
-}
-
-function loadEvents() {
-    eventsList.innerHTML = ''; // Clear existing events
-    if (selectedDate) {
-        const dateKey = selectedDate.toDateString();
-        const dateEvents = events[dateKey] || [];
-        dateEvents.forEach((event, index) => {
-            const li = document.createElement('li');
-            const eventText = document.createElement('span');
-            eventText.textContent = event.text;
-            eventText.className = event.done ? 'event-text done' : 'event-text'; // Add class based on done status
-
-            const eventButtons = document.createElement('div');
-            eventButtons.classList.add('event-buttons');
-
-            const doneButton = document.createElement('button');
-            doneButton.textContent = 'Done';
-            doneButton.classList.add('done-btn');
-            doneButton.onclick = () => markEventAsDone(dateKey, index);
-
-            const deleteButton = document.createElement('button');
-            deleteButton.textContent = 'Delete';
-            deleteButton.classList.add('delete-btn');
-            deleteButton.onclick = () => deleteEvent(dateKey, index);
-
-            eventButtons.appendChild(doneButton);
-            eventButtons.appendChild(deleteButton);
-
-            li.appendChild(eventText);
-            li.appendChild(eventButtons);
-            eventsList.appendChild(li);
+        // Handle click to select date
+        dayElement.addEventListener('click', () => {
+            selectedDate = new Date(currentYear, currentMonth, i);
+            loadEvents();
+            document.querySelectorAll('.calendar-day').forEach(day => day.classList.remove('selected'));
+            dayElement.classList.add('selected');
         });
+
+        calendarDays.appendChild(dayElement);
     }
 }
 
-function addEvent() {
-    const eventText = eventInput.value.trim();
-    if (!eventText || !selectedDate) return;
+// Show events for the selected date
+function loadEvents() {
+    const eventList = document.getElementById('eventList');
+    const selectedDateLabel = document.getElementById('selectedDate');
+    eventList.innerHTML = ''; // Clear previous events
+
+    if (!selectedDate) return;
 
     const dateKey = selectedDate.toDateString();
-    if (!events[dateKey]) events[dateKey] = [];
-    events[dateKey].push({ text: eventText, done: false });
+    selectedDateLabel.textContent = selectedDate.toLocaleDateString();
+    const eventsForTheDay = events[dateKey] || [];
 
-    localStorage.setItem('events', JSON.stringify(events));
-    eventInput.value = '';
-    loadCalendar();
-    loadEvents();
+    eventsForTheDay.forEach((event, index) => {
+        const eventItem = document.createElement('div');
+        eventItem.classList.add('event-item');
+        if (event.done) eventItem.classList.add('done');
+
+        const eventText = document.createElement('span');
+        eventText.textContent = event.text;
+
+        // Create buttons
+        const buttonContainer = document.createElement('div');
+        buttonContainer.classList.add('event-buttons');
+
+        const doneBtn = document.createElement('button');
+        doneBtn.textContent = 'Done';
+        doneBtn.classList.add('done-btn');
+        doneBtn.addEventListener('click', () => markEventAsDone(dateKey, index));
+
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = 'Delete';
+        deleteBtn.classList.add('delete-btn');
+        deleteBtn.addEventListener('click', () => deleteEvent(dateKey, index));
+
+        // Append the text and buttons to the button container
+        buttonContainer.appendChild(doneBtn);
+        buttonContainer.appendChild(deleteBtn);
+
+        // Append the text and buttons to the event item
+        eventItem.appendChild(eventText);
+        eventItem.appendChild(buttonContainer);
+
+        eventList.appendChild(eventItem);
+    });
 }
 
+// Add a new event
+function addEvent() {
+    const eventInput = document.getElementById('eventInput');
+    const eventText = eventInput.value.trim();
+
+    if (eventText && selectedDate) {
+        const dateKey = selectedDate.toDateString();
+        if (!events[dateKey]) events[dateKey] = [];
+        events[dateKey].push({ text: eventText, done: false });
+        saveEvents();
+        loadEvents(); // Reload event list
+        eventInput.value = ''; // Clear input
+    }
+}
+
+// Mark an event as done
 function markEventAsDone(dateKey, index) {
     events[dateKey][index].done = true;
-    localStorage.setItem('events', JSON.stringify(events));
-    loadEvents();
+    saveEvents();
+    loadEvents();  // Reload event list
 }
 
+// Delete an event
 function deleteEvent(dateKey, index) {
     events[dateKey].splice(index, 1);
     if (events[dateKey].length === 0) delete events[dateKey];
-    localStorage.setItem('events', JSON.stringify(events));
-    loadCalendar();
-    loadEvents();
+    saveEvents();
+    loadCalendar();  // Reload calendar to reflect removal of event dot
+    loadEvents();  // Reload event list
 }
 
-// Digital clock logic
+// Switch to previous month
+function prevMonth() {
+    currentMonth--;
+    if (currentMonth < 0) {
+        currentMonth = 11;
+        currentYear--;
+    }
+    loadCalendar();
+}
+
+// Switch to next month
+function nextMonth() {
+    currentMonth++;
+    if (currentMonth > 11) {
+        currentMonth = 0;
+        currentYear++;
+    }
+    loadCalendar();
+}
+
+// Digital clock
 function updateClock() {
+    const clockElement = document.getElementById('clock');
     const now = new Date();
-    let hours = now.getHours();
-    const minutes = now.getMinutes();
-    const seconds = now.getSeconds();
-    const amPm = hours >= 12 ? 'PM' : 'AM';
-    hours = hours % 12 || 12;  // Convert to 12-hour format
-    document.getElementById('clockDisplay').textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')} ${amPm}`;
+    const hours = now.getHours() % 12 || 12;
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+    const ampm = now.getHours() >= 12 ? 'PM' : 'AM';
+    clockElement.textContent = `${hours}:${minutes}:${seconds} ${ampm}`;
 }
 
-setInterval(updateClock, 1000); // Update clock every second
+setInterval(updateClock, 1000);  // Update clock every second
 
-// Event Listeners
-addEventButton.addEventListener('click', addEvent);
-eventInput.addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') addEvent();
+// Add event when "Enter" key is pressed in the input field
+document.getElementById('eventInput').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        addEvent();
+    }
 });
 
-document.getElementById('prevMonth').addEventListener('click', () => {
-    currentDate.setMonth(currentDate.getMonth() - 1);
-    loadCalendar();
+document.addEventListener('DOMContentLoaded', function () {
+    loadEventsFromStorage();  // Load events from localStorage on page load
+    document.getElementById('addEventBtn').addEventListener('click', addEvent);
+    document.getElementById('prevMonthBtn').addEventListener('click', prevMonth);
+    document.getElementById('nextMonthBtn').addEventListener('click', nextMonth);
 });
-
-document.getElementById('nextMonth').addEventListener('click', () => {
-    currentDate.setMonth(currentDate.getMonth() + 1);
-    loadCalendar();
-});
-
-// Initial Load
-loadCalendar();
-updateClock();  // Start clock

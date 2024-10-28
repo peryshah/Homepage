@@ -7,169 +7,163 @@ body {
 }
 
 
-.container {
+#main-container {
     display: flex;
-    justify-content: center;
-    /* align-items: flex-start; */
-    width: 90vw; /* Set container width to 90vw */
-    height: 60vh; /* Set container height to 50vh */
-    padding-left: 3vw;
+    width: 100vw;
+    height: 50vh;
+    justify-content: space-between;
 }
-.clock-section {
-    width: 160px; /* Set width for clock section */
-    /* background-color: #e0e0e0; */
-    padding: 20px;
-    /* box-shadow: 0 0 10px rgba(0,0,0,0.1); */
+
+#clock-container {
+    width: 20vw;
     text-align: center;
-    margin-right: 20px; /* Space between clock and calendar */
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Center content vertically */
-}
-.clock {
-    font-size: 48px;
-    font-weight: bold;
-    color: #ff0000;
-}
-.calendar {
-    width: 50%;
+    background-color: #ebe418;
     padding: 20px;
-    margin: 20px; /* Added margin */
-    background-color: #e0e0e0;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    overflow: auto; /* Allows scrolling if content exceeds height */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-.calendar-header {
+
+#clock {
+    font-size: 4em;
+    font-weight: bolder;
+    color: #f44336;
+    margin-top: 40%;
+}
+
+#calendar-container {
+    width: 40vw;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#calendar-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 10px;
 }
-.calendar-header button {
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-.calendar-header button:hover {
-    background-color: #0056b3;
-}
-.calendar-weekdays {
+
+#weekdays {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     margin-top: 10px;
     font-weight: bold;
+    text-align: center;
 }
-.calendar-body {
+
+#calendar-days {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 10px;
-    margin-top: 20px;
+    grid-gap: 5px;
+    margin-top: 10px;
+    font-weight: bold;
 }
-.day {
+
+.calendar-day {
+    background-color: #ddd;
     padding: 10px;
-    background-color: #f0f0f0;
     text-align: center;
+    cursor: pointer;
     position: relative;
-    cursor: pointer; /* Cursor to indicate clickable */
 }
-.day:hover {
-    background-color: #7774c3;
+
+.calendar-day.selected {
+    background-color: #ffeb3b; /* Highlight for selected day */
 }
-.today {
-    background-color: #b1cfee;
-    /* color: white; */
-    /* border-radius: 50%; */
-    box-shadow: 0 0 6px 2px #c894ed;
+
+.calendar-day.today {
+    border: 2px solid rgb(241, 236, 241);
+    box-shadow: 0 0 10px rgba(232, 14, 232, 0.6);
+    color: rgba(255, 0, 0, 0.6);
 }
-.selected {
-    background-color: #f1a1a1; /* Color for selected date */
-    /* border-radius: 50%; Optional: rounded corners */
-    color: #f10606; /* Change text color for better contrast */
-}
+
 .event-dot {
-    width: 16px; /* Updated width */
-    height: 2px; /* Updated height */
-    background-color: #ff6347;
-    border-radius: 2px;
+    width: 16px;
+    height: 2px;
+    background-color: red;
     position: absolute;
     bottom: 5px;
     left: 50%;
     transform: translateX(-50%);
 }
-.events {
-    width: 50%;
+
+#event-container {
+    width: 40vw;
+    background-color: #fff;
     padding: 20px;
-    margin: 20px; /* Added margin */
-    background-color: #e0e0e0;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    overflow: auto; /* Allows scrolling if content exceeds height */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative; /* For positioning the button container */
 }
-.events-list {
-    list-style-type: none;
-    padding: 0;
-}
-.events-list li {
+
+#eventInput {
+    width: 75%;
     padding: 10px;
-    background-color: #f8f9fa;
-    margin-bottom: 10px;
-    border-left: 4px solid #007bff;
+    margin-top: 10px;
+}
+
+#addEventBtn {
+    width: 20%;
+    padding: 10px;
+    margin-top: 10px;
+    margin-left: 5%;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#event-input-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Event List Styling */
+.event-list {
+    background-color: #e0f7fa; /* Highlighted background for event list */
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+/* Additional CSS for button styling and positioning */
+.event-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 10px;
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
 }
-.event-text {
-    flex-grow: 1;
-    margin-right: 10px;
+
+.event-item.done span {
+    text-decoration: line-through;
 }
-.event-text.done {
-    text-decoration: line-through; /* Strikethrough for done events */
-    color: grey;
-}
-.event-input {
-    display: flex;
-    margin-bottom: 20px;
-}
-.event-input input {
-    width: 80%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-.event-input button {
-    width: 20%;
-    padding: 10px;
-    background-color: #28a745;
-    color: white;
+
+.event-item button {
+    margin-left: 10px;
+    padding: 5px 10px;
     border: none;
     cursor: pointer;
 }
-.event-input button:hover {
-    background-color: #218838;
+
+.event-item button.done-btn {
+    background-color: #4caf50;  /* Green background for "Done" button */
+    color: white;
 }
+
+.event-item button.delete-btn {
+    background-color: #f44336;  /* Red background for "Delete" button */
+    color: white;
+}
+
+/* New container for event action buttons */
 .event-buttons {
     display: flex;
-    gap: 5px;
+    justify-content: flex-end; /* Align buttons to the right */
+    margin-top: 10px;
 }
-.event-buttons button {
-    padding: 5px;
-    border: none;
-    color: white;
-    cursor: pointer;
-    border-radius: 3px;
-}
-.event-buttons .delete-btn {
-    background-color: #dc3545;
-}
-.event-buttons .done-btn {
-    background-color: #28a745;
-}
-.event-buttons .delete-btn:hover {
-    background-color: #c82333;
-}
-.event-buttons .done-btn:hover {
-    background-color: #218838;
-}
+
 
 
 
@@ -270,16 +264,18 @@ table {
 
 
 /* CSS for Games////////////////////////////////////////////////////////////////////////////// */
-.ytdownload{
+.ytdownload {
     font-family: Arial, sans-serif;
     text-align: center;
     padding-top: 50px;
 }
+
 #videoUrlInput {
     width: 80%;
     padding: 10px;
     margin-bottom: 20px;
 }
+
 #downloadButton {
     padding: 12px 20px;
     background-color: #007bff;
