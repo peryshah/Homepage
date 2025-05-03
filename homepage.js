@@ -191,3 +191,15 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('prevMonthBtn').addEventListener('click', prevMonth);
     document.getElementById('nextMonthBtn').addEventListener('click', nextMonth);
 });
+
+
+
+
+
+
+
+
+
+
+
+

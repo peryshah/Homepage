@@ -17,7 +17,7 @@ body {
 #clock-container {
     width: 20vw;
     text-align: center;
-    background-color: #ebe418;
+    background-color: #5355eb;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -25,7 +25,7 @@ body {
 #clock {
     font-size: 4em;
     font-weight: bolder;
-    color: #f44336;
+    color: #000000;
     margin-top: 40%;
 }
 
@@ -286,3 +286,4 @@ table {
 }
 
 /* CSS for SUDUKU Starts.................................................................. */
+
